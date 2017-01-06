@@ -12,6 +12,9 @@
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
+    "eslint": "^3.13.0",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.2.0",
     "should": "^7.1.0",
     "supertest": "^1.0.0",
     "swagger-editor": "^2.10.4"
