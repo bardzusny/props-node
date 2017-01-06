@@ -1135,6 +1135,10 @@ swagger-converter@^0.1.7:
   dependencies:
     lodash.clonedeep "^2.4.1"
 
+swagger-editor@^2.10.4:
+  version "2.10.4"
+  resolved "https://registry.yarnpkg.com/swagger-editor/-/swagger-editor-2.10.4.tgz#cc4dade86259bc52e40d91e9f42ff565ece978ab"
+
 swagger-express-mw@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/swagger-express-mw/-/swagger-express-mw-0.1.0.tgz#b1e4fb5a01959cef22991a121eae494add30e53a"

@@ -13,10 +13,12 @@
   },
   "devDependencies": {
     "should": "^7.1.0",
-    "supertest": "^1.0.0"
+    "supertest": "^1.0.0",
+    "swagger-editor": "^2.10.4"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test"
+    "test": "swagger project test",
+    "edit": "swagger_swagger_editorDir=node_modules/swagger-editor swagger project edit"
   }
 }
