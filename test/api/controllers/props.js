@@ -5,6 +5,11 @@ const { Prop } = require('../../../models');
 
 describe('controllers', () => {
   describe('props', () => {
+    before((done) => {
+      Prop.destroy({ where: {} })
+        .then(() => done());
+    });
+
     describe('POST /props', () => {
       it('should create new prop', (done) => {
         request(server)
@@ -14,7 +19,7 @@ describe('controllers', () => {
           .end((err, res) => {
             should.not.exist(err);
 
-            res.body.should.eql({ body: 'hello there' });
+            res.body.should.containEql({ body: 'hello there' });
 
             Prop.findAll()
               .then((props) => {
