@@ -27,6 +27,19 @@ paths:
         "201":
           description: Success
           schema:
+            items:
+              $ref: "#/definitions/PropsResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    get:
+      description: Fetches list of props
+      operationId: propsList
+      responses:
+        "200":
+          description: Success
+          schema:
             $ref: "#/definitions/PropsResponse"
         default:
           description: Error
