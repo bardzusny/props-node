@@ -28,4 +28,35 @@ describe('user model', () => {
         });
     });
   });
+
+  describe('isValidPassword method', () => {
+    let user;
+
+    before((done) => {
+      User.build({ password: 'password' })
+        .hashPassword()
+        .then((freshUser) => {
+          user = freshUser;
+          done();
+        });
+    });
+
+    describe('with invalid password', () => {
+      it('returns promise resolving with "false" value', (done) => {
+        user.isValidPassword('123password123')
+          .then((result) => {
+            result.should.eql(false);
+            done();
+          });
+      });
+
+      it('returns promise resolving with "true" value', (done) => {
+        user.isValidPassword('password')
+          .then((result) => {
+            result.should.eql(true);
+            done();
+          });
+      });
+    });
+  });
 });
