@@ -12,7 +12,7 @@ describe('controllers', () => {
         .then(() => done());
     });
 
-    describe('POST /user/login', () => {
+    describe('POST /users/login', () => {
       let user;
 
       before((done) => {

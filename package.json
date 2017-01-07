@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "NODE_ENV=test mocha test/**/*.js",
+    "test": "NODE_ENV=test mocha test/api/**/*.js",
     "edit": "swagger_swagger_editorDir=node_modules/swagger-editor swagger project edit"
   }
 }
