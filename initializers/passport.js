@@ -24,6 +24,13 @@ passport.use(new LocalStrategy((username, password, done) => {
     .catch(done);
 }));
 
-passport.use(new BearerStrategy(() => {
-  // ...
+passport.use(new BearerStrategy((token, done) => {
+  const id = (jwt.decode(token, process.env.JWT_SECRET, true, 'HS256') || {}).id;
+
+  User.find({ where: { id } })
+    .then((user) => {
+      if (!user) return done(null, false);
+      return done(null, user);
+    })
+    .catch(done);
 }));
