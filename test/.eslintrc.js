@@ -6,5 +6,6 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': 0,
     'no-unused-expressions': 0,
+    'new-cap': 0,
   },
 };

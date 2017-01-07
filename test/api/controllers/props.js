@@ -1,7 +1,8 @@
 const should = require('should');
 const request = require('supertest');
 const server = require('../../../app');
-const { Prop, User } = require('../../../models');
+const UserFactory = require('../../factories/user');
+const { Prop } = require('../../../models');
 const authHelper = require('../../helpers/auth_helper');
 
 describe('controllers', () => {
@@ -29,10 +30,7 @@ describe('controllers', () => {
         before((done) => {
           process.env.JWT_TOKEN = '123';
 
-          User.create({
-            username: 'john.doe',
-            password: '123QWEasd',
-          }).then((createdUser) => {
+          UserFactory.create().then((createdUser) => {
             user = createdUser;
             return authHelper.fetchAuthorizationToken(user);
           }).then((authToken) => {

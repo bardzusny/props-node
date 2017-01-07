@@ -1,6 +1,7 @@
 const should = require('should');
 const request = require('supertest');
 const server = require('../../../app');
+const UserFactory = require('../../factories/user');
 const { User } = require('../../../models');
 const jwt = require('jwt-simple');
 const sinon = require('sinon');
@@ -16,10 +17,7 @@ describe('controllers', () => {
       let user;
 
       before((done) => {
-        User.create({
-          username: 'john.doe',
-          password: '123QWEasd',
-        }).then((createdUser) => {
+        UserFactory.create().then((createdUser) => {
           user = createdUser;
           done();
         });
