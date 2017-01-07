@@ -1,5 +1,8 @@
+require('dotenv').config();
+
 const SwaggerExpress = require('swagger-express-mw');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const app = require('express')();
 
 require('./initializers/passport');
@@ -14,6 +17,7 @@ SwaggerExpress.create(config, (err, swaggerExpress) => {
   if (err) { throw err; }
 
   // install middleware
+  app.use(bodyParser.json());
   app.use(passport.initialize());
 
   app.use('/api/users/login', passport.authenticate('local', { session: false }));
