@@ -8,6 +8,7 @@
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "express": "^4.12.3",
@@ -34,7 +35,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "NODE_ENV=test mocha test/**/*.spec.js",
+    "test": "NODE_ENV=test mocha test/**/*.spec.js test/api/**/*.spec.js",
     "edit": "swagger_swagger_editorDir=node_modules/swagger-editor swagger project edit"
   }
 }

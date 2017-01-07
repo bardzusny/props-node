@@ -2,10 +2,11 @@ const { User } = require('props-node/models');
 const chance = require('chance').Chance();
 
 module.exports = {
-  create() {
-    return User.create({
+  create(password = chance.string()) {
+    return User.build({
       username: chance.name(),
-      password: chance.string(),
-    });
+      password,
+    }).hashPassword()
+      .then(user => user.save());
   },
 };
