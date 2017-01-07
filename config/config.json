@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "props_node",
+    "password": null,
+    "database": "props_node_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "props_node",
+    "password": null,
+    "database": "props_node_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "props_node",
+    "password": null,
+    "database": "props_node_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
