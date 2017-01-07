@@ -13,8 +13,15 @@ const resource = {
           .send(prop);
       });
   },
+
+  query(req, res) {
+    Prop.findAll()
+      .then(props => res.status(200).send(props))
+      .catch(err => res.status(500).send(err));
+  },
 };
 
 module.exports = {
   create: resource.create,
+  propsList: resource.query,
 };
