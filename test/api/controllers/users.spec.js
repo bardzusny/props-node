@@ -1,4 +1,5 @@
 const should = require('should');
+const chance = require('chance').Chance();
 const request = require('supertest');
 const server = require('../../../app');
 const UserFactory = require('../../factories/user');
@@ -14,10 +15,11 @@ describe('controllers', () => {
     });
 
     describe('POST /users/login', () => {
+      const password = chance.string();
       let user;
 
       before((done) => {
-        UserFactory.create().then((createdUser) => {
+        UserFactory.create(password).then((createdUser) => {
           user = createdUser;
           done();
         });
@@ -65,7 +67,7 @@ describe('controllers', () => {
         it('should return authentication token with user ID', (done) => {
           request(server)
             .post('/api/users/login')
-            .send({ username: user.username, password: user.password })
+            .send({ username: user.username, password })
             .expect(200)
             .end((err, res) => {
               should.not.exist(err);
