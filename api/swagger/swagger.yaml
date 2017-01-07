@@ -32,6 +32,33 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /users/login:
+    x-swagger-router-controller: users
+    post:
+      description: Logs in existing user
+      operationId: login
+      parameters:
+        - name: username
+          in: formData
+          description: Username of user
+          required: true
+          type: string
+        - name: password
+          in: formData
+          description: Correct password of given user
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            properties:
+              token:
+                type: string
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 definitions:

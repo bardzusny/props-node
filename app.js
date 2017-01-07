@@ -16,7 +16,7 @@ SwaggerExpress.create(config, (err, swaggerExpress) => {
   // install middleware
   app.use(passport.initialize());
 
-  app.use('/api/user/login', passport.authenticate('local', { session: false }));
+  app.use('/api/users/login', passport.authenticate('local', { session: false }));
   // TODO: list of authenticated routes must be held/handled in a better way than this
   ['/api/props'].forEach((path) => {
     app.use(path, passport.authenticate('bearer', { session: false }));
