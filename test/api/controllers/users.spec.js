@@ -14,6 +14,46 @@ describe('controllers', () => {
         .then(() => done());
     });
 
+    describe('POST /users', () => {
+      describe('with missing password', () => {
+        it('should return 400 status code', (done) => {
+          request(server)
+            .post('/api/users')
+            .send({ username: chance.name() })
+            .expect(400)
+            .end((err) => {
+              should.not.exist(err);
+              done();
+            });
+        });
+      });
+
+      describe('with correct params', () => {
+        it('should create and respond with new user account', (done) => {
+          const userData = {
+            username: chance.name(),
+            password: chance.string(),
+          };
+          request(server)
+            .post('/api/users')
+            .send(userData)
+            .expect(201)
+            .end((err, res) => {
+              should.not.exist(err);
+
+              res.body.username.should.eql(userData.username);
+              res.body.password.should.not.eql(userData.password);
+
+              User.find({ where: { id: res.body.id } })
+                .then((user) => {
+                  should.exist(user);
+                  done();
+                });
+            });
+        });
+      });
+    });
+
     describe('POST /users/login', () => {
       const password = chance.string();
       let user;

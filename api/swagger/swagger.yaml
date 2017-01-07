@@ -32,6 +32,31 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /users:
+    x-swagger-router-controller: users
+    post:
+      description: Registers new user account
+      operationId: userRegister
+      parameters:
+        - name: username
+          in: formData
+          description: Username of user
+          required: true
+          type: string
+        - name: password
+          in: formData
+          description: Password for this user
+          required: true
+          type: string
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/UserResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /users/login:
     x-swagger-router-controller: users
     post:
@@ -67,6 +92,12 @@ definitions:
       - body
     properties:
       body:
+        type: string
+  UserResponse:
+    required:
+      - username
+    properties:
+      username:
         type: string
   ErrorResponse:
     required:
