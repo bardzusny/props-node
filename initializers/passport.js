@@ -18,8 +18,12 @@ passport.use(new LocalStrategy((username, password, done) => {
   User.find({ where: { username } })
     .then((user) => {
       if (!user) return done(null, false);
-      if (password !== user.password) return done(null, false);
-      return done(null, user);
+
+      return user.isValidPassword(password)
+        .then((result) => {
+          if (!result) return done(null, false);
+          return done(null, user);
+        });
     })
     .catch(done);
 }));

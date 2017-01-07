@@ -1,3 +1,4 @@
+const chance = require('chance').Chance();
 const should = require('should');
 const request = require('supertest');
 const server = require('../../../app');
@@ -29,10 +30,11 @@ describe('controllers', () => {
 
         before((done) => {
           process.env.JWT_TOKEN = '123';
+          const password = chance.string();
 
-          UserFactory.create().then((createdUser) => {
+          UserFactory.create(password).then((createdUser) => {
             user = createdUser;
-            return authHelper.fetchAuthorizationToken(user);
+            return authHelper.fetchAuthorizationToken(user, password);
           }).then((authToken) => {
             token = authToken;
             done();
