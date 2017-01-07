@@ -1,11 +1,12 @@
 const should = require('should');
 const request = require('supertest');
 const server = require('../../../app');
+const { Prop } = require('../../../models');
 
 describe('controllers', () => {
   describe('props', () => {
     describe('POST /props', () => {
-      it('should return prop with same data as given in request body', (done) => {
+      it('should create new prop', (done) => {
         request(server)
           .post('/api/props')
           .send({ body: 'hello there' })
@@ -15,7 +16,12 @@ describe('controllers', () => {
 
             res.body.should.eql({ body: 'hello there' });
 
-            done();
+            Prop.findAll()
+              .then((props) => {
+                props.length.should.eql(1);
+
+                done();
+              });
           });
       });
     });
