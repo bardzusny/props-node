@@ -19,6 +19,7 @@
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0",
+    "sequelize-cli": "^2.5.1",
     "should": "^7.1.0",
     "supertest": "^1.0.0",
     "swagger-editor": "^2.10.4"
