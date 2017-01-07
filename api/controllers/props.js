@@ -2,7 +2,11 @@ const { Prop } = require('props-node/models');
 
 const resource = {
   create(req, res) {
-    Prop.create(req.body)
+    const propData = Object.assign({
+      UserId: req.user.id,
+    }, req.body);
+
+    Prop.create(propData)
       .then((prop) => {
         res
           .status(201)

@@ -50,7 +50,10 @@ describe('controllers', () => {
             .end((err, res) => {
               should.not.exist(err);
 
-              res.body.should.containEql({ body: 'hello world' });
+              res.body.should.containEql({
+                body: 'hello world',
+                UserId: user.id,
+              });
 
               Prop.findAll()
                 .then((props) => {
