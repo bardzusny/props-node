@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const app = require('express')();
 
+require('./initializers/promisification');
 require('./initializers/passport');
 
 module.exports = app; // for testing
