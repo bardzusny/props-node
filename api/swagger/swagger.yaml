@@ -73,6 +73,8 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/UserResponse"
+        "404":
+          description: Trying to prop non-existant user
         default:
           description: Error
           schema:
