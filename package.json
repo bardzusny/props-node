@@ -31,7 +31,7 @@
     "mocha": "^3.2.0",
     "sequelize-cli": "^2.5.1",
     "should": "^7.1.0",
-    "supertest": "^1.0.0",
+    "supertest": "^2.0.1",
     "swagger-editor": "^2.10.4"
   },
   "scripts": {
