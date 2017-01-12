@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       associate(models) {
         Prop.belongsTo(models.User);
+        Prop.belongsToMany(models.User, { through: 'UsersPropsed', as: 'propsed' });
       },
     },
   });
