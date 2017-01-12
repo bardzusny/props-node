@@ -23,6 +23,13 @@ paths:
           description: Text of actual prop
           required: true
           type: string
+        - name: propsed
+          in: formData
+          description: IDs of users that we want to give prop to
+          required: true
+          type: array
+          items:
+            type: number
       responses:
         "201":
           description: Success
@@ -106,6 +113,10 @@ definitions:
     properties:
       body:
         type: string
+      propsed:
+        type: array
+        items:
+          $ref: "#/definitions/UserResponse"
   UserResponse:
     required:
       - username
