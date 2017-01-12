@@ -12,23 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     instanceMethods: {
       isValidPassword(password) {
-        return new Promise((resolve, reject) => {
-          bcrypt.compare(password, this.password, (err, result) => {
-            if (err) return reject(err);
-            return resolve(result);
-          });
-        });
+        return bcrypt.compareAsync(password, this.password);
       },
 
       hashPassword() {
-        return new Promise((resolve, reject) => {
-          bcrypt.hash(this.password, 10, (err, res) => {
-            if (err) return reject(err);
-
+        return bcrypt.hashAsync(this.password, 10)
+          .then((res) => {
             this.password = res;
-            return resolve(this);
+            return this;
           });
-        });
       },
     },
   });
