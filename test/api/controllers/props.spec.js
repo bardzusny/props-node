@@ -39,6 +39,19 @@ describe('controllers', () => {
       });
 
       describe('with correct authentication header', () => {
+        it('should respond with 400 for request without propsed users', (done) => {
+          request(server)
+            .post('/api/props')
+            .set('Authorization', `Bearer ${token}`)
+            .send({ body: 'hello world' })
+            .expect(400)
+            .end((err) => {
+              should.not.exist(err);
+
+              done();
+            });
+        });
+
         it('should create new prop', (done) => {
           request(server)
             .post('/api/props')
