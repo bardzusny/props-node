@@ -79,6 +79,15 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    get:
+      description: Fetches list of users
+      operationId: usersList
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: "#/definitions/UserResponse"
   /users/login:
     x-swagger-router-controller: users
     post:
