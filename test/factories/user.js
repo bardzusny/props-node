@@ -1,4 +1,4 @@
-const { User } = require('props-node/models');
+const { User } = require('../../models');
 const chance = require('chance').Chance();
 
 module.exports = {

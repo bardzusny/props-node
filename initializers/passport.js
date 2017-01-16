@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const jwt = require('jwt-simple');
-const { User } = require('props-node/models');
+const { User } = require('../models');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
