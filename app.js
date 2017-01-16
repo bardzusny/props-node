@@ -26,6 +26,9 @@ SwaggerExpress.create(config, (err, swaggerExpress) => {
   ['/api/props'].forEach((path) => {
     app.use(path, passport.authenticate('bearer', { session: false }));
   });
+  ['/api/users'].forEach((path) => {
+    app.get(path, passport.authenticate('bearer', { session: false }));
+  });
 
   swaggerExpress.register(app);
 
