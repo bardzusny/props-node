@@ -102,10 +102,10 @@ describe('controllers', () => {
 
       before((done) => {
         Prop.destroy({ where: {} })
-          .then(() => PropFactory.create(user))
+          .then(() => PropFactory.create(user, [propsedUser]))
           .then((prop) => {
             prop1 = prop;
-            return PropFactory.create(user);
+            return PropFactory.create(user, [propsedUser]);
           })
           .then((prop) => {
             prop2 = prop;
@@ -123,7 +123,7 @@ describe('controllers', () => {
       });
 
       describe('with correct authentication header', () => {
-        it('should respond with list of existing props', (done) => {
+        it('should respond with list of existing props with populated author, propsed users associations', (done) => {
           request(server)
             .get('/api/props')
             .set('Authorization', `Bearer ${token}`)
@@ -134,6 +134,10 @@ describe('controllers', () => {
               res.body.length.should.eql(2);
               res.body[0].id.should.eql(prop1.id);
               res.body[1].id.should.eql(prop2.id);
+
+              res.body[0].User.id.should.eql(user.id);
+              res.body[0].propsed.length.should.eql(1);
+              res.body[0].propsed[0].id.should.eql(propsedUser.id);
 
               done();
             });
