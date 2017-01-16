@@ -1,37 +1,36 @@
-const { Prop, User, UsersPropsed } = require('../../models');
+const { Prop, User } = require('../../models');
 
 const resource = {
   create(req, res) {
     const { propsed } = req.body;
     let createdProp;
 
-    User.findAll({
-      where: { id: propsed },
-    }).then((users) => {
-      if (users.length !== propsed.length) return Promise.reject(404);
-      return Prop.create(Object.assign({
-        UserId: req.user.id,
-      }, req.body));
-    }).then((prop) => {
-      createdProp = prop;
-      return prop.setPropsed(propsed);
-    }).then(() => {
-      return Prop.find({
+    User.findAll({ where: { id: propsed } })
+      .then((users) => {
+        if (users.length !== propsed.length) return Promise.reject(404);
+        return Prop.create(Object.assign({
+          UserId: req.user.id,
+        }, req.body));
+      })
+      .then((prop) => {
+        createdProp = prop;
+        return prop.setPropsed(propsed);
+      })
+      .then(() => Prop.find({
         where: { id: createdProp.id },
         include: [{
           model: User,
           as: 'propsed',
         }],
+      }))
+      .then((prop) => {
+        res.status(201)
+          .send(prop);
+      })
+      .catch((err) => {
+        if (typeof err === 'number') return res.status(404).end();
+        return res.status(500).end(err);
       });
-    }).then((prop) => {
-      res
-        .status(201)
-        .send(prop);
-    }).catch((err) => {
-      if (typeof err === 'number') return res.status(404).end();
-      console.log(err);
-      return res.status(500).end(err);
-    });
   },
 
   query(req, res) {
