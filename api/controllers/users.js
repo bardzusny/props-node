@@ -14,9 +14,16 @@ const resource = {
       .then(user => res.status(201).send(user))
       .catch(err => res.status(500).send(err));
   },
+
+  query(req, res) {
+    User.findAll({})
+      .then(users => res.status(200).send(users))
+      .catch(err => res.status(500).send(err));
+  },
 };
 
 module.exports = {
   login: resource.login,
   userRegister: resource.create,
+  usersList: resource.query,
 };
