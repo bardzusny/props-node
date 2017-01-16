@@ -1,4 +1,4 @@
-const { Prop, User } = require('../../models');
+const { Prop, User, UsersPropsed } = require('../../models');
 
 const resource = {
   create(req, res) {
@@ -35,8 +35,13 @@ const resource = {
   },
 
   query(req, res) {
-    Prop.findAll()
-      .then(props => res.status(200).send(props))
+    Prop.findAll({
+      include: [User, {
+        model: User,
+        as: 'propsed',
+        through: 'UsersPropsed',
+      }],
+    }).then(props => res.status(200).send(props))
       .catch(err => res.status(500).send(err));
   },
 };
