@@ -14,7 +14,7 @@ passport.deserializeUser((id, done) => {
     .catch(err => done(err, null));
 });
 
-passport.use(new LocalStrategy((username, password, done) => {
+passport.use(new LocalStrategy({ session: false }, (username, password, done) => {
   User.find({ where: { username } })
     .then((user) => {
       if (!user) return done(null, false);
@@ -28,7 +28,7 @@ passport.use(new LocalStrategy((username, password, done) => {
     .catch(done);
 }));
 
-passport.use(new BearerStrategy((token, done) => {
+passport.use(new BearerStrategy({ session: false }, (token, done) => {
   const id = (jwt.decode(token, process.env.JWT_SECRET, true, 'HS256') || {}).id;
 
   User.find({ where: { id } })

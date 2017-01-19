@@ -48,12 +48,12 @@ const resource = {
 
 module.exports = {
   create(req, res) {
-    passport.authenticate('bearer', { session: false })(
+    passport.authenticate('bearer')(
       req, res, resource.create.bind(null, req, res)
     );
   },
   propsList(req, res) {
-    passport.authenticate('bearer', { session: false })(
+    passport.authenticate('bearer')(
       req, res, resource.query.bind(null, req, res)
     );
   },

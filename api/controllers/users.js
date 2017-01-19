@@ -25,13 +25,13 @@ const resource = {
 
 module.exports = {
   login(req, res) {
-    passport.authenticate('local', { session: false })(
+    passport.authenticate('local')(
       req, res, resource.login.bind(null, req, res)
     );
   },
   userRegister: resource.create,
   usersList(req, res) {
-    passport.authenticate('bearer', { session: false })(
+    passport.authenticate('bearer')(
       req, res, resource.query.bind(null, req, res)
     );
   },
