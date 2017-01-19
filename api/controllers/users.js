@@ -1,5 +1,6 @@
 const { User } = require('../../models');
 const jwt = require('jwt-simple');
+const passport = require('passport');
 
 const resource = {
   login(req, res) {
@@ -23,7 +24,15 @@ const resource = {
 };
 
 module.exports = {
-  login: resource.login,
+  login(req, res) {
+    passport.authenticate('local', { session: false })(
+      req, res, resource.login.bind(null, req, res)
+    );
+  },
   userRegister: resource.create,
-  usersList: resource.query,
+  usersList(req, res) {
+    passport.authenticate('bearer', { session: false })(
+      req, res, resource.query.bind(null, req, res)
+    );
+  },
 };

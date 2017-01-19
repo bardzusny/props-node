@@ -1,3 +1,4 @@
+const passport = require('passport');
 const { Prop, User } = require('../../models');
 
 const resource = {
@@ -46,6 +47,14 @@ const resource = {
 };
 
 module.exports = {
-  create: resource.create,
-  propsList: resource.query,
+  create(req, res) {
+    passport.authenticate('bearer', { session: false })(
+      req, res, resource.create.bind(null, req, res)
+    );
+  },
+  propsList(req, res) {
+    passport.authenticate('bearer', { session: false })(
+      req, res, resource.query.bind(null, req, res)
+    );
+  },
 };

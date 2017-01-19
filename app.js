@@ -21,15 +21,6 @@ SwaggerExpress.create(config, (err, swaggerExpress) => {
   app.use(bodyParser.json());
   app.use(passport.initialize());
 
-  app.use('/api/users/login', passport.authenticate('local', { session: false }));
-  // TODO: list of authenticated routes must be held/handled in a better way than this
-  ['/api/props'].forEach((path) => {
-    app.use(path, passport.authenticate('bearer', { session: false }));
-  });
-  ['/api/users'].forEach((path) => {
-    app.get(path, passport.authenticate('bearer', { session: false }));
-  });
-
   swaggerExpress.register(app);
 
   const port = process.env.PORT || 10010;
